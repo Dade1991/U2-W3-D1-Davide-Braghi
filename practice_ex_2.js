@@ -19,10 +19,13 @@ const breedInput = document.getElementById(`breedInput`)
 const rubricaForm = document.getElementById(`rubrica-form`)
 const petList = document.getElementById(`petList`)
 
+// creo un Array in cui ciclare e controllare i nomi dei possessori degli animali.
+
+const petsArray = []
+
 // Scrivo la funzione che mi permette di aggiungere un evento ad ogni "submit" che:
 // - Non fa aggiornare la pagina ogni volta che schiaccio su "submit" o invia;
 // - Raccoglie solo i valori (value) forniti dal form;
-// In ultimo vado a creare un elemento per visualizzare sul documento HTML la lista di tutti i possibili input (informazioni compilate nel form) che l'utente invierà (appendChild su petList richiamato/identificato sopra);
 
 rubricaForm.addEventListener(`submit`, function (e) {
   e.preventDefault()
@@ -32,7 +35,24 @@ rubricaForm.addEventListener(`submit`, function (e) {
     speciesInput.value,
     breedInput.value
   )
+
+  // aggiungo un ciclo for che controllerà se negli input appena forniti nel form, esiste una corrispondenza con gli input precedentemente inseriti nel form (e quindi anche nello stesso "petsArray")
+  // Di base è "false", se trova corrisponza con il nome del proprietario, diventerà "true".
+
+  let ownerNameComparison = false
+  for (let i = 0; i < petsArray.length; i++) {
+    if (petsArray[i].ownerName === newPet.ownerName) {
+      ownerNameComparison = true
+    }
+  }
+
+  // Pusho i miei risultati dentro l'array "petsArray"
+
+  petsArray.push(newPet)
+
+  // In ultimo vado a creare un elemento per visualizzare sul documento HTML la lista di tutti i possibili input (informazioni compilate nel form) che l'utente invierà (appendChild su petList richiamato/identificato sopra);
+
   const singleItemPet = document.createElement(`li`)
-  singleItemPet.textContent = `Pet's Name: ${newPet.petName}, Owner's Name: ${newPet.ownerName}, Pet's Species: ${newPet.species}, Pet's Breed: ${newPet.breed}. This Pet has the same Owner of some other? (true: Yes / false: No) ==> ${newPet.sameOwner}`
+  singleItemPet.textContent = `Pet's Name: ${newPet.petName}, Owner's Name: ${newPet.ownerName}, Pet's Species: ${newPet.species}, Pet's Breed: ${newPet.breed}. Altro animale con stesso proprietario? ${ownerNameComparison}`
   petList.appendChild(singleItemPet)
 })
