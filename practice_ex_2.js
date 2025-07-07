@@ -53,6 +53,6 @@ rubricaForm.addEventListener(`submit`, function (e) {
   // In ultimo vado a creare un elemento per visualizzare sul documento HTML la lista di tutti i possibili input (informazioni compilate nel form) che l'utente invierà (appendChild su petList richiamato/identificato sopra);
 
   const singleItemPet = document.createElement(`li`)
-  singleItemPet.textContent = `Pet's Name: ${newPet.petName}, Owner's Name: ${newPet.ownerName}, Pet's Species: ${newPet.species}, Pet's Breed: ${newPet.breed}. Altro animale con stesso proprietario? ${ownerNameComparison}`
+  singleItemPet.textContent = `Pet's Name: ${newPet.petName}, Owner's Name: ${newPet.ownerName}, Pet's Species: ${newPet.species}, Pet's Breed: ${newPet.breed}. Other Owner insert in this list? ${ownerNameComparison}`
   petList.appendChild(singleItemPet)
 })
